@@ -1,7 +1,9 @@
-12
 5
-_WWWW_______
-W____WW_____
-W__PB_SW____
-_WWWWWW_____
-____________
+7
+WWWWW
+WS SW
+W BPW
+WBBBW
+W B W
+WSSSW
+WWWWW

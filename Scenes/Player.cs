@@ -31,6 +31,10 @@ public class Player : KinematicBody2D
             // GetParent().GetTree().ReloadCurrentScene();
             ((Game)GetParent()).ResetLevel();
         }
+        else if (@event.IsActionPressed("title"))
+        {
+            GetTree().ChangeScene("res://Scenes/Title.tscn");
+        }
     }
 
     private void Move(string dir)
