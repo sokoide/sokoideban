@@ -7,14 +7,14 @@ public class Title : Node
     private const int K = 60;
     Node2D player;
     Vector2 playerDefaultPos;
-    Node2D box;
+    Box box;
     Vector2 boxDefaultPos;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         player = (Node2D)FindNode("Player");
-        box = (Node2D)FindNode("Box");
+        box = (Box)FindNode("Box");
         playerDefaultPos = player.Position;
         boxDefaultPos = box.Position;
         SetupButtons();
@@ -34,6 +34,10 @@ public class Title : Node
         {
             player.Position += new Vector2(Const.GRID_SIZE, 0);
             box.Position += new Vector2(Const.GRID_SIZE, 0);
+            if (frame == 9)
+            {
+                box.On(true);
+            }
         }
         else if (frame <= 12)
         {
@@ -41,6 +45,7 @@ public class Title : Node
         else
         {
             tick = -180;
+            box.On(false);
             player.Position = playerDefaultPos;
             box.Position = boxDefaultPos;
         }

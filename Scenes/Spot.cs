@@ -19,6 +19,7 @@ public class Spot : Area2D
         if (body.IsInGroup(Const.BoxGroup))
         {
             occupied = true;
+            ((Box)body).On(true);
         }
     }
 
@@ -27,6 +28,7 @@ public class Spot : Area2D
         if (body.IsInGroup(Const.BoxGroup))
         {
             occupied = false;
+            ((Box)body).On(false);
         }
     }
 }

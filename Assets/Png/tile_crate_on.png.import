@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/crate_45.png-184d9f9e08d65123d565fea47f958366.stex"
+path="res://.import/tile_crate_on.png-7672073d984c762aa76751f56e192c94.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Crates/crate_45.png"
-dest_files=[ "res://.import/crate_45.png-184d9f9e08d65123d565fea47f958366.stex" ]
+source_file="res://Assets/Png/tile_crate_on.png"
+dest_files=[ "res://.import/tile_crate_on.png-7672073d984c762aa76751f56e192c94.stex" ]
 
 [params]
 

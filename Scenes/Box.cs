@@ -5,6 +5,9 @@ using System.Collections.Generic;
 public class Box : KinematicBody2D
 {
     private RayCast2D ray;
+    private Sprite onSprite;
+
+
     private Dictionary<string, Vector2> inputs = new Dictionary<string, Vector2>(){
         {"ui_up", Vector2.Up},
         {"ui_down", Vector2.Down},
@@ -15,6 +18,7 @@ public class Box : KinematicBody2D
     public override void _Ready()
     {
         ray = (RayCast2D)FindNode("RayCast2D");
+        onSprite = (Sprite)FindNode("On");
     }
     public bool Move(string dir)
     {
@@ -27,5 +31,17 @@ public class Box : KinematicBody2D
             return true;
         }
         return false;
+    }
+
+    public void On(bool on)
+    {
+        if (on)
+        {
+            onSprite.Show();
+        }
+        else
+        {
+            onSprite.Hide();
+        }
     }
 }
