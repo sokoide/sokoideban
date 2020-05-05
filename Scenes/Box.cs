@@ -28,6 +28,12 @@ public class Box : KinematicBody2D
         if (!ray.IsColliding())
         {
             this.Position += vectorPos;
+            int x = ((int)this.Position.x - Const.X_OFFSET) / Const.GRID_SIZE;
+            int y = ((int)this.Position.y - Const.Y_OFFSET) / Const.GRID_SIZE;
+            char t = Global.CurrentLevelMap.Chip(x, y);
+
+            if (t == 'S' || t == '.') On(true);
+            else On(false);
             return true;
         }
         return false;

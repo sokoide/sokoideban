@@ -95,9 +95,9 @@ public class Game : Node2D
 
     public void ResetLevel()
     {
-        Level l = GetLevel(Global.CurrentLevel);
+        Global.CurrentLevelMap = GetLevel(Global.CurrentLevel);
         // l.Dump();
-        SetLevel(l);
+        SetLevel(Global.CurrentLevelMap);
         moves = 0;
         ((Label)FindNode("LabelLevel")).Text = "Level: " + Global.CurrentLevel.ToString();
         gameEnded = false;

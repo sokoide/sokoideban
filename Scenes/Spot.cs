@@ -28,7 +28,6 @@ public class Spot : Area2D
         if (body.IsInGroup(Const.BoxGroup))
         {
             occupied = false;
-            ((Box)body).On(false);
         }
     }
 }
