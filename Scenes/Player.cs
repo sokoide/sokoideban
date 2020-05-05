@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class Player : KinematicBody2D
 {
-    const int GRIDSIZE = 64;
     private RayCast2D ray;
     private Dictionary<string, Vector2> inputs = new Dictionary<string, Vector2>(){
         {"ui_up", Vector2.Up},
@@ -29,7 +28,8 @@ public class Player : KinematicBody2D
         }
         if (@event.IsActionPressed("reset"))
         {
-            GetParent().GetTree().ReloadCurrentScene();
+            // GetParent().GetTree().ReloadCurrentScene();
+            ((Game)GetParent()).ResetLevel();
         }
     }
 
@@ -37,7 +37,7 @@ public class Player : KinematicBody2D
     {
         Game game = (Game)GetParent();
 
-        var vectorPos = inputs[dir] * GRIDSIZE;
+        var vectorPos = inputs[dir] * Const.GRID_SIZE;
         ray.CastTo = vectorPos;
         ray.ForceRaycastUpdate();
         if (!ray.IsColliding())
@@ -49,7 +49,7 @@ public class Player : KinematicBody2D
         else
         {
             var collider = ray.GetCollider();
-            if (((Node)collider).IsInGroup("box"))
+            if (((Node)collider).IsInGroup(Const.BoxGroup))
             // if (collider is Box)
             {
                 if (((Box)collider).Move(dir) == true)
@@ -60,10 +60,4 @@ public class Player : KinematicBody2D
             }
         }
     }
-
-    //  // Called every frame. 'delta' is the elapsed time since the previous frame.
-    //  public override void _Process(float delta)
-    //  {
-    //
-    //  }
 }

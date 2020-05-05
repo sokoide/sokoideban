@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class Box : KinematicBody2D
 {
-    const int GRIDSIZE = 64;
     private RayCast2D ray;
     private Dictionary<string, Vector2> inputs = new Dictionary<string, Vector2>(){
         {"ui_up", Vector2.Up},
@@ -19,7 +18,7 @@ public class Box : KinematicBody2D
     }
     public bool Move(string dir)
     {
-        var vectorPos = inputs[dir] * GRIDSIZE;
+        var vectorPos = inputs[dir] * Const.GRID_SIZE;
         ray.CastTo = vectorPos;
         ray.ForceRaycastUpdate();
         if (!ray.IsColliding())

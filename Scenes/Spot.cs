@@ -16,7 +16,7 @@ public class Spot : Area2D
 
     public void _on_Spot_body_entered(Node body)
     {
-        if (body.IsInGroup("box"))
+        if (body.IsInGroup(Const.BoxGroup))
         {
             occupied = true;
         }
@@ -24,7 +24,7 @@ public class Spot : Area2D
 
     public void _on_Spot_body_exited(Node body)
     {
-        if (body.IsInGroup("box"))
+        if (body.IsInGroup(Const.BoxGroup))
         {
             occupied = false;
         }
