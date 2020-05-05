@@ -10,10 +10,10 @@ public class Level
 
     private char[,] chip;
 
-    public Level(int w, int h)
+    public Level(string[] rows)
     {
-        Width = w;
-        Height = h;
+        Width = rows[0].Length;
+        Height = rows.Length;
         chip = new char[Height, Width];
     }
 

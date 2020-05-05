@@ -110,11 +110,11 @@ public class Game : Node2D
         file.Close();
 
         string[] comps = content.Split("\n");
-        Level l = new Level(int.Parse(comps[0]), int.Parse(comps[1]));
+        Level l = new Level(comps);
 
         int x = 0;
         int y = 0;
-        for (int i = 2; i < comps.Length; i++)
+        for (int i = 0; i < comps.Length; i++)
         {
             x = 0;
             foreach (char c in comps[i].ToCharArray())
@@ -156,21 +156,30 @@ public class Game : Node2D
                 if (l.Chip(x, y) == '_') continue;
                 switch (l.Chip(x, y))
                 {
+                    case 'W':
+                        n = (Node2D)wallScene.Instance();
+                        n.Position = new Vector2(Const.X_OFFSET + x * Const.GRID_SIZE, Const.Y_OFFSET + y * Const.GRID_SIZE);
+                        wallsNode.AddChild(n);
+                        break;
                     case 'B':
                         n = (Node2D)boxScene.Instance();
                         n.Position = new Vector2(Const.X_OFFSET + x * Const.GRID_SIZE, Const.Y_OFFSET + y * Const.GRID_SIZE);
                         n.AddToGroup(Const.BoxGroup);
                         boxesNode.AddChild(n);
                         break;
-                    case 'W':
-                        n = (Node2D)wallScene.Instance();
-                        n.Position = new Vector2(Const.X_OFFSET + x * Const.GRID_SIZE, Const.Y_OFFSET + y * Const.GRID_SIZE);
-                        wallsNode.AddChild(n);
-                        break;
                     case 'S':
                         n = (Node2D)spotScene.Instance();
                         n.Position = new Vector2(Const.X_OFFSET + x * Const.GRID_SIZE, Const.Y_OFFSET + y * Const.GRID_SIZE);
                         spotsNode.AddChild(n);
+                        break;
+                    case '.':
+                        n = (Node2D)spotScene.Instance();
+                        n.Position = new Vector2(Const.X_OFFSET + x * Const.GRID_SIZE, Const.Y_OFFSET + y * Const.GRID_SIZE);
+                        spotsNode.AddChild(n);
+                        n = (Node2D)boxScene.Instance();
+                        n.Position = new Vector2(Const.X_OFFSET + x * Const.GRID_SIZE, Const.Y_OFFSET + y * Const.GRID_SIZE);
+                        n.AddToGroup(Const.BoxGroup);
+                        boxesNode.AddChild(n);
                         break;
                     case 'P':
                         n = (Node2D)FindNode("Player");
