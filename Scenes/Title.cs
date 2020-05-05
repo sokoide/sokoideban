@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public class Title : Node
 {
@@ -53,17 +54,21 @@ public class Title : Node
 
     private void SetupButtons()
     {
-        HBoxContainer h = (HBoxContainer)FindNode("HBoxContainer");
+        HBoxContainer h1 = (HBoxContainer)FindNode("HBoxContainer1");
+        HBoxContainer h2 = (HBoxContainer)FindNode("HBoxContainer2");
+        HBoxContainer h3 = (HBoxContainer)FindNode("HBoxContainer3");
+        List<HBoxContainer> hs = new List<HBoxContainer> { h1, h2, h3 };
         LevelButton b1 = (LevelButton)FindNode("LevelButton");
         b1.ButtonID = 1;
 
         for (int i = 2; i <= Const.MAX_LEVELS; i++)
         {
+            int y = (i - 1) / 10;
             LevelButton b = (LevelButton)b1.Duplicate();
             b.Name = string.Format("Button{0}", i);
             b.Text = i.ToString();
             b.ButtonID = i;
-            h.AddChild(b);
+            hs[y].AddChild(b);
         }
     }
 }

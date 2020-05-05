@@ -15,6 +15,7 @@ public class Game : Node2D
         AddChild(timer);
         Debug.WriteLine("Ready called");
         ResetLevel();
+        AdjustCamera();
     }
     public override async void _Process(float delta)
     {
@@ -101,6 +102,19 @@ public class Game : Node2D
         moves = 0;
         ((Label)FindNode("LabelLevel")).Text = "Level: " + Global.CurrentLevel.ToString();
         gameEnded = false;
+    }
+
+    private void AdjustCamera()
+    {
+        Camera2D c = (Camera2D)FindNode("Camera2D");
+        if (Global.CurrentLevelMap.Width > 13 || Global.CurrentLevelMap.Height > 9)
+        {
+            c.Zoom = new Vector2(1.5f, 1.5f);
+        }
+        else
+        {
+            c.Zoom = new Vector2(1, 1);
+        }
     }
     private Level GetLevel(int level)
     {

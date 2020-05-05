@@ -93,12 +93,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer1" type="HBoxContainer" parent="VBoxContainer"]
 margin_right = 896.0
 margin_bottom = 34.0
-custom_constants/separation = 20
+custom_constants/separation = 4
 
-[node name="LevelButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="LevelButton" type="Button" parent="VBoxContainer/HBoxContainer1"]
 margin_right = 896.0
 margin_bottom = 34.0
 size_flags_horizontal = 3
@@ -109,4 +109,16 @@ script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="button_up" from="VBoxContainer/HBoxContainer/LevelButton" to="VBoxContainer/HBoxContainer/LevelButton" method="_on_LevelButton_button_up"]
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 36.0
+margin_right = 896.0
+margin_bottom = 36.0
+custom_constants/separation = 4
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 38.0
+margin_right = 896.0
+margin_bottom = 38.0
+custom_constants/separation = 4
+[connection signal="button_up" from="VBoxContainer/HBoxContainer1/LevelButton" to="VBoxContainer/HBoxContainer1/LevelButton" method="_on_LevelButton_button_up"]
