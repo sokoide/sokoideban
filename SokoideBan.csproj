@@ -57,10 +57,13 @@
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="Scenes\Box.cs" />
         <Compile Include="Scenes\Game.cs" />
+        <Compile Include="Scenes\LevelButton.cs" />
         <Compile Include="Scenes\Player.cs" />
         <Compile Include="Scenes\Spot.cs" />
         <Compile Include="Code\Level.cs" />
         <Compile Include="Code\Const.cs" />
+        <Compile Include="Code\Global.cs" />
+        <Compile Include="Scenes\Title.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

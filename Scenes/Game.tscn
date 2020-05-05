@@ -6,13 +6,10 @@
 [ext_resource path="res://Scenes/Box.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Game.cs" type="Script" id=5]
 [ext_resource path="res://Assets/Fonts/Pixeboy-z8XGD.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Scenes/Font48.tres" type="DynamicFont" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
-font_data = ExtResource( 6 )
-
-[sub_resource type="DynamicFont" id=2]
-size = 48
 font_data = ExtResource( 6 )
 
 [node name="Game" type="Node2D"]
@@ -158,10 +155,13 @@ margin_left = 4.0
 margin_top = 4.0
 margin_right = 508.0
 margin_bottom = 252.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = ExtResource( 7 )
 text = "Level Cleared!"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AcceptDialog" type="AcceptDialog" parent="CanvasLayer"]
 margin_left = 384.0

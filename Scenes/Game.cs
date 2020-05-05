@@ -1,12 +1,12 @@
 using Godot;
 using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 public class Game : Node2D
 {
     bool gameEnded = false;
     int moves = 0;
-    int currentLevel = 1;
     int displayCounter = 0;
     Timer timer = new Timer();
 
@@ -16,7 +16,7 @@ public class Game : Node2D
         Debug.WriteLine("Ready called");
         ResetLevel();
     }
-    public override void _Process(float delta)
+    public override async void _Process(float delta)
     {
         ((Label)FindNode("LabelMoves")).Text = "Moves: " + moves.ToString();
         if (displayCounter++ > 60)
@@ -37,8 +37,11 @@ public class Game : Node2D
                 // level cleared
                 // ((AcceptDialog)FindNode("AcceptDialog")).Popup_();
                 gameEnded = true;
-                ShowLevelCleared();
-                GoToNextLevel();
+                await ShowLevelCleared();
+                if (!GoToNextLevel())
+                {
+                    GetTree().ChangeScene("res://Scenes/Title.tscn");
+                }
             }
             else if (displayCounter == 0)
             {
@@ -47,19 +50,19 @@ public class Game : Node2D
         }
     }
 
-    private async void ShowLevelCleared()
+    private async Task ShowLevelCleared()
     {
         PopupPanel panel = ((PopupPanel)FindNode("LevelClearedPanel"));
         Label label = (Label)panel.FindNode("Message");
 
-        if (currentLevel < Const.MAX_LEVELS)
+        if (Global.CurrentLevel < Const.MAX_LEVELS)
         {
-            label.Text = string.Format("Level {0} cleared.\n\nLet's go to\nthe next level!", currentLevel);
+            label.Text = string.Format("Level {0} cleared.\n\nLet's go to\nthe next level!", Global.CurrentLevel);
             timer.WaitTime = 2.0f;
         }
         else
         {
-            label.Text = string.Format("Congratulations!\n\nAll levels cleared\nGoing back to level 1");
+            label.Text = "Congratulations!\n\nAll levels cleared!!!";
             timer.WaitTime = 5.0f;
         }
         panel.ShowModal();
@@ -76,25 +79,27 @@ public class Game : Node2D
         // GetTree().ReloadCurrentScene();
     }
 
-    public void GoToNextLevel()
+    public bool GoToNextLevel()
     {
-        currentLevel++;
-        if (currentLevel > Const.MAX_LEVELS)
+        Global.CurrentLevel++;
+        if (Global.CurrentLevel > Const.MAX_LEVELS)
         {
-            currentLevel = 1;
+            Global.CurrentLevel = 1;
+            return false;
         }
         ResetLevel();
+        return true;
     }
 
     public void IncrementMoves() { moves++; }
 
     public void ResetLevel()
     {
-        Level l = GetLevel(currentLevel);
+        Level l = GetLevel(Global.CurrentLevel);
         // l.Dump();
         SetLevel(l);
         moves = 0;
-        ((Label)FindNode("LabelLevel")).Text = "Level: " + currentLevel.ToString();
+        ((Label)FindNode("LabelLevel")).Text = "Level: " + Global.CurrentLevel.ToString();
         gameEnded = false;
     }
     private Level GetLevel(int level)
