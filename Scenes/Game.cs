@@ -15,7 +15,6 @@ public class Game : Node2D
         AddChild(timer);
         Debug.WriteLine("Ready called");
         ResetLevel();
-        AdjustCamera();
     }
     public override async void _Process(float delta)
     {
@@ -104,6 +103,8 @@ public class Game : Node2D
         moves = 0;
         ((Label)FindNode("LabelLevel")).Text = "Level: " + Global.CurrentLevel.ToString();
         gameEnded = false;
+
+        AdjustCamera();
     }
 
     private void AdjustCamera()

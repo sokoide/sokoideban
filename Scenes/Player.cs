@@ -54,7 +54,8 @@ public class Player : KinematicBody2D
                 else
                 {
                     // UNDO_BOX
-                    item.r.Position -= item.dir * Const.GRID_SIZE;
+                    // item.r.Position -= item.dir * Const.GRID_SIZE;
+                    item.r.Move(-1 * item.dir, true);
                 }
             }
             // decrement
@@ -85,7 +86,7 @@ public class Player : KinematicBody2D
             if (((Node)collider).IsInGroup(Const.BoxGroup))
             // if (collider is Box)
             {
-                if (((Box)collider).Move(dir) == true)
+                if (((Box)collider).Move(inputs[dir]) == true)
                 {
                     this.Position += vectorPos;
                     game.IncrementMoves();
