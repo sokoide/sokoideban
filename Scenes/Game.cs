@@ -120,7 +120,7 @@ public class Game : Node2D
     private Level GetLevel(int level)
     {
         File file = new File();
-        file.Open(string.Format("res://Assets/Levels/{0:000}.txt", level), File.ModeFlags.Read);
+        file.Open(string.Format("res://Assets/Levels/{0:000}.dat", level), File.ModeFlags.Read);
         string content = file.GetAsText();
         file.Close();
 
