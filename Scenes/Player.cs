@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 public class Player : KinematicBody2D
 {
@@ -19,6 +20,7 @@ public class Player : KinematicBody2D
 
     public override void _UnhandledInput(InputEvent @event)
     {
+        Game game = (Game)GetParent();
         foreach (var dir in inputs.Keys)
         {
             if (@event.IsActionPressed(dir))
@@ -35,6 +37,29 @@ public class Player : KinematicBody2D
         {
             GetTree().ChangeScene("res://Scenes/Title.tscn");
         }
+        else if (@event.IsActionPressed("undo"))
+        {
+            List<UndoBuffer.UndoBufferItem> items = Global.UndoBuffer.Pop();
+            if (items.Count == 0) return;
+
+            // undo
+            foreach (UndoBuffer.UndoBufferItem item in items)
+            {
+                Debug.WriteLine("Undo: {0}, {1}, {2}", item.t, item.dir, item.r);
+                if (item.t == UndoBuffer.UndoBufferItemType.UNDO_PLAYER)
+                {
+                    // UNDO_PLAYER
+                    this.Position -= item.dir * Const.GRID_SIZE;
+                }
+                else
+                {
+                    // UNDO_BOX
+                    item.r.Position -= item.dir * Const.GRID_SIZE;
+                }
+            }
+            // decrement
+            game.DecrementMoves();
+        }
     }
 
     private void Move(string dir)
@@ -49,6 +74,10 @@ public class Player : KinematicBody2D
 
             this.Position += vectorPos;
             game.IncrementMoves();
+            // add into undo buffer
+            Global.UndoBuffer.Push(new List<UndoBuffer.UndoBufferItem>(){
+                new UndoBuffer.UndoBufferItem(UndoBuffer.UndoBufferItemType.UNDO_PLAYER, inputs[dir]),
+            });
         }
         else
         {
@@ -60,6 +89,11 @@ public class Player : KinematicBody2D
                 {
                     this.Position += vectorPos;
                     game.IncrementMoves();
+                    // add into undo buffer
+                    Global.UndoBuffer.Push(new List<UndoBuffer.UndoBufferItem>(){
+                            new UndoBuffer.UndoBufferItem(UndoBuffer.UndoBufferItemType.UNDO_PLAYER, inputs[dir]),
+                            new UndoBuffer.UndoBufferItem(UndoBuffer.UndoBufferItemType.UNDO_BOX, inputs[dir], (Box)collider),
+                    });
                 }
             }
         }

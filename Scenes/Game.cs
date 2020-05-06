@@ -93,6 +93,7 @@ public class Game : Node2D
     }
 
     public void IncrementMoves() { moves++; }
+    public void DecrementMoves() { moves--; }
 
     public void ResetLevel()
     {

@@ -152,7 +152,10 @@ R:
  Reset Level
 
 T:
- Back to Title"
+ Back to Title
+
+Z:
+ Undo"
 __meta__ = {
 "_edit_use_anchors_": false
 }

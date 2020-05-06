@@ -63,6 +63,7 @@
         <Compile Include="Code\Level.cs" />
         <Compile Include="Code\Const.cs" />
         <Compile Include="Code\Global.cs" />
+        <Compile Include="Code\UndoBuffer.cs" />
         <Compile Include="Scenes\Title.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
