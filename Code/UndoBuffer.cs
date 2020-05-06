@@ -23,6 +23,11 @@ public class UndoBuffer
 
     private List<List<UndoBufferItem>> buffer = new List<List<UndoBufferItem>>();
 
+    public void Clear()
+    {
+        buffer.Clear();
+    }
+
     public void Push(List<UndoBufferItem> items)
     {
         buffer.Add(items);

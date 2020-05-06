@@ -98,6 +98,7 @@ public class Game : Node2D
     public void ResetLevel()
     {
         Global.CurrentLevelMap = GetLevel(Global.CurrentLevel);
+        Global.UndoBuffer.Clear();
         // l.Dump();
         SetLevel(Global.CurrentLevelMap);
         moves = 0;
